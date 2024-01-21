@@ -2,26 +2,30 @@ const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
 // Option 3: Passing parameters separately (other dialects)
-let sequelize;
-if (process.env.NODE_ENV === "production") {
-    sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_USER, process.env.DATABASE_PASSWORD, {
-        host: process.env.HOST_LIVE,
-        dialect: 'mysql',
-        logging: false
+const sequelize = new Sequelize(
+    process.env.DB_DATABASE_NAME,
+    process.env.DB_USERNAME,
+    process.env.DB_PASSWORD,
+    {
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT,
+        dialect: 'postgres',
+        logging: false,
+        dialectOptions:
+            process.env.DB_SSL === 'true' ?
+                {
+                    ssl: {
+                        require: true,
+                        rejectUnauthorized: false
+                    }
+                } : {}
+        ,
+        query: {
+            "raw": true
+        },
+        timezone: "+07:00"
     });
 
-} else {
-    sequelize = new Sequelize('hoidanit', 'root', null, {
-        host: 'localhost',
-        dialect: 'mysql',
-        logging: false
-    });
-}
-// const sequelize = new Sequelize('sql12676903', 'sql12676903', process.env.DATABASE_PASSWORD, {
-//     host: 'sql12.freesqldatabase.com',
-//     dialect: 'mysql',
-//     logging: false
-// });
 
 let connectDB = async () => {
     try {

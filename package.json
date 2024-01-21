@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env NODE_ENV=development nodemon --exec npx babel-node src/server.js",
-    "production": "cross-env NODE_ENV=production --exec npx babel-node src/server.js"
+    "start": "cross-env NODE_ENV=development nodemon --exec npx babel-node src/server.js"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +20,8 @@
     "lodash": "^4.17.21",
     "mysql2": "^2.2.5",
     "nodemailer": "6.6.3",
+    "pg": "8.7.1",
+    "pg-hstore": "2.3.4",
     "sequelize": "^6.2.2",
     "uuid": "8.3.2"
   },
