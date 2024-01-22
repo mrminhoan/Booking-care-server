@@ -209,6 +209,8 @@ let getDetailDoctorById = (id) => {
 let bulkCreateSchedule = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
+            console.log({ data })
+
             if (!data.arrSchedule || !data.doctorId || !data.dateFormatted) {
                 resolve({
                     errCode: -1,
@@ -222,7 +224,7 @@ let bulkCreateSchedule = (data) => {
                 })
 
                 let existing = await db.Schedule.findAll({
-                    where: { doctorId: data.doctorId, date: data.dateFormatted },
+                    where: { doctorId: data.doctorId, date: data.dateFormatted.toString() },
                     attributes: ['timeType', 'date', 'doctorId', 'maxNumber'],
                     raw: true
                 });
